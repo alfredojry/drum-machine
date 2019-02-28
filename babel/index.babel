@@ -1,0 +1,209 @@
+// React
+
+class DrumMachine extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: '',
+      volume: 50
+    };
+    this.handleChangeRange = this.handleChangeRange.bind(this);
+    this.handleChangeQ = this.handleChangeQ.bind(this);
+    this.handleChangeW = this.handleChangeW.bind(this);
+    this.handleChangeE = this.handleChangeE.bind(this);
+    this.handleChangeA = this.handleChangeA.bind(this);
+    this.handleChangeS = this.handleChangeS.bind(this);
+    this.handleChangeD = this.handleChangeD.bind(this);
+    this.handleChangeZ = this.handleChangeZ.bind(this);
+    this.handleChangeX = this.handleChangeX.bind(this);
+    this.handleChangeC = this.handleChangeC.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+  handleChangeRange(event) {
+    this.setState({
+      volume: event.target.value,
+      message: 'Volume: ' + event.target.value
+    });
+    const letter = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+    let volume = this.state.volume / 100;
+    letter.forEach(char => {
+      document.getElementById(char).volume = volume;
+    });
+  }
+  handleChangeQ() {
+    let audioClip = document.getElementById('Q');
+    this.setState({
+      message: 'Chord #1'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeW() {
+    let audioClip = document.getElementById('W');
+    this.setState({
+      message: 'Chord #2'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeE() {
+    let audioClip = document.getElementById('E');
+    this.setState({
+      message: 'Chord #3'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeA() {
+    let audioClip = document.getElementById('A');
+    this.setState({
+      message: 'Heater #6'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeS() {
+    let audioClip = document.getElementById('S');
+    this.setState({
+      message: 'Brk_Snr'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeD() {
+    let audioClip = document.getElementById('D');
+    this.setState({
+      message: 'Bld_H1'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeZ() {
+    let audioClip = document.getElementById('Z');
+    this.setState({
+      message: 'Heater #1'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeX() {
+    let audioClip = document.getElementById('X');
+    this.setState({
+      message: 'Heater #2'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleChangeC() {
+    let audioClip = document.getElementById('C');
+    this.setState({
+      message: 'Heater #3'
+    });
+    audioClip.currentTime = 0;
+    audioClip.volume = this.state.volume / 100;
+    audioClip.play();
+  }
+  handleKeyPress(event) {
+    switch(event.keyCode) {
+      case 81:
+        //this.handleChangeQ();
+        document.getElementById('chord-1').click();
+        break;
+      case 87:
+        this.handleChangeW();
+        break;
+      case 69:
+        this.handleChangeE();
+        break;
+      case 65:
+        this.handleChangeA();
+        break;
+      case 83:
+        this.handleChangeS();
+        break;
+      case 68:
+        this.handleChangeD();
+        break;
+      case 90:
+        this.handleChangeZ();
+        break;
+      case 88:
+        this.handleChangeX();
+        break;
+      case 67:
+        this.handleChangeC();
+        break;
+    }
+  }
+  render() {
+    return (
+    <div id='drum-machine'>
+        <div id='top-container'>
+          <h2 className='text-center'>Drum Machine</h2>
+        </div>
+      <div id='left-container'>
+        {/*<-----Q button----->*/}
+        <button className='drum-pad btn' id='chord-1' onClick={this.handleChangeQ}>Q
+        <audio id='Q' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3' />
+        </button>
+        {/*<-----W button----->*/}
+        <button className='drum-pad btn' id='chord-2' onClick={this.handleChangeW}>W
+        <audio id='W' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3' />
+        </button>
+        {/*<-----E button----->*/}
+        <button className='drum-pad btn' id='chord-3' onClick={this.handleChangeE}>E
+        <audio id='E' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3' />
+        </button>
+        {/*<-----A button----->*/}
+        <button className='drum-pad btn'id='heater-6' onClick={this.handleChangeA}>A
+        <audio id='A' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3' />
+        </button>
+        {/*<-----S button----->*/}
+        <button className='drum-pad btn' id='brk-snr' onClick={this.handleChangeS}>S
+        <audio id='S' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3' />
+        </button>
+        {/*<-----D button----->*/}
+        <button className='drum-pad btn' id='bld-h1' onClick={this.handleChangeD}>D
+        <audio id='D' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3' />
+        </button>
+        {/*<-----Z button----->*/}
+        <button className='drum-pad btn' id='heater-1' onClick={this.handleChangeZ}>Z
+        <audio id='Z' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3' />
+        </button>
+        {/*<-----X button----->*/}
+        <button className='drum-pad btn' id='heater-2' onClick={this.handleChangeX}>X
+        <audio id='X' className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3' />
+        </button>
+        {/*<-----C button----->*/}
+        <button className='drum-pad btn'id='heater-3' onClick={this.handleChangeC}>C
+        <audio id='C'className='clip' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3' />
+        </button>
+      </div>
+      <div id='right-container'>
+        <div id='display' className='text-center'>
+        {this.state.message}
+        </div>
+        <div>
+          <input type='range' onChange={this.handleChangeRange} />
+        </div>
+      </div>
+    </div>
+    );
+  }
+}
+
+ReactDOM.render(<DrumMachine/>, document.getElementById('root'));
